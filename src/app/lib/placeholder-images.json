@@ -1,0 +1,34 @@
+{
+  "placeholderImages": [
+    {
+      "id": "hero-image",
+      "description": "Abstract AI and creativity background",
+      "imageUrl": "https://picsum.photos/seed/scripta1/1200/800",
+      "imageHint": "AI creativity"
+    },
+    {
+      "id": "platform-demo",
+      "description": "ScriptaNova dashboard preview",
+      "imageUrl": "https://picsum.photos/seed/scripta2/800/600",
+      "imageHint": "SaaS dashboard"
+    },
+    {
+      "id": "cover-generator",
+      "description": "AI book cover examples",
+      "imageUrl": "https://picsum.photos/seed/scripta3/800/1000",
+      "imageHint": "book cover"
+    },
+    {
+      "id": "blog-1",
+      "description": "Writing tip blog post",
+      "imageUrl": "https://picsum.photos/seed/scripta4/600/400",
+      "imageHint": "writing office"
+    },
+    {
+      "id": "blog-2",
+      "description": "AI technology in literature",
+      "imageUrl": "https://picsum.photos/seed/scripta5/600/400",
+      "imageHint": "AI chip"
+    }
+  ]
+}

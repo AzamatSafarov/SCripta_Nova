@@ -1,0 +1,283 @@
+
+{
+  "entities": {
+    "WaitlistEntry": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "WaitlistEntry",
+      "type": "object",
+      "description": "Represents an entry in the waitlist for ScriptaNova.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the WaitlistEntry entity."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the user who joined the waitlist.",
+          "format": "email"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Timestamp indicating when the user joined the waitlist.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "email",
+        "timestamp"
+      ]
+    },
+    "ContactFormEntry": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "ContactFormEntry",
+      "type": "object",
+      "description": "Represents an entry from the contact form on the ScriptaNova website.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the ContactFormEntry entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the person submitting the contact form."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the person submitting the contact form.",
+          "format": "email"
+        },
+        "subject": {
+          "type": "string",
+          "description": "Subject of the contact form message."
+        },
+        "message": {
+          "type": "string",
+          "description": "Content of the contact form message."
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Timestamp indicating when the contact form was submitted.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "email",
+        "subject",
+        "message",
+        "timestamp"
+      ]
+    },
+    "BlogPost": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "BlogPost",
+      "type": "object",
+      "description": "Represents a blog post on the ScriptaNova website.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the BlogPost entity."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the blog post."
+        },
+        "content": {
+          "type": "string",
+          "description": "Content of the blog post (likely stored as rich text or HTML)."
+        },
+        "authorId": {
+          "type": "string",
+          "description": "Reference to the Author of the blog post. (Relationship: Author 1:N BlogPost)"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the blog post (e.g., Writing, AI, Marketing)."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags associated with the blog post.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "publicationDate": {
+          "type": "string",
+          "description": "Date when the blog post was published.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "content",
+        "authorId",
+        "category",
+        "publicationDate"
+      ]
+    },
+    "Author": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Author",
+      "type": "object",
+      "description": "Represents an author of blog posts.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Author entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the author."
+        },
+        "bio": {
+          "type": "string",
+          "description": "Biography of the author."
+        },
+        "profileImageUrl": {
+          "type": "string",
+          "description": "URL of the author's profile image.",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "GoogleApiKey": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "GoogleApiKey",
+      "type": "object",
+      "description": "Stores Google AI (Gemini) API keys for users.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to the User."
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "The Google API key."
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "apiKey",
+        "createdDate"
+      ]
+    },
+    "User": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User",
+      "type": "object",
+      "description": "Represents a user of the ScriptaNova platform.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the User entity."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the user.",
+          "format": "email"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the user."
+        },
+        "creationDate": {
+          "type": "string",
+          "description": "Date when the user account was created.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "email",
+        "creationDate"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/waitlist_entries/{waitlistEntryId}",
+        "definition": {
+          "entityName": "WaitlistEntry",
+          "schema": {
+            "$ref": "#/backend/entities/WaitlistEntry"
+          },
+          "description": "Collection to store waitlist entries."
+        }
+      },
+      {
+        "path": "/contact_form_entries/{contactFormEntryId}",
+        "definition": {
+          "entityName": "ContactFormEntry",
+          "schema": {
+            "$ref": "#/backend/entities/ContactFormEntry"
+          },
+          "description": "Collection to store contact form submissions."
+"
+        }
+      },
+      {
+        "path": "/blog_posts/{blogPostId}",
+        "definition": {
+          "entityName": "BlogPost",
+          "schema": {
+            "$ref": "#/backend/entities/BlogPost"
+          },
+          "description": "Collection to store blog posts."
+        }
+      },
+      {
+        "path": "/authors/{authorId}",
+        "definition": {
+          "entityName": "Author",
+          "schema": {
+            "$ref": "#/backend/entities/Author"
+          },
+          "description": "Collection to store author information."
+        }
+      },
+      {
+        "path": "/users/{userId}",
+        "definition": {
+          "entityName": "User",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Collection to store user data."
+        }
+      },
+      {
+        "path": "/users/{userId}/google_api_keys/{googleApiKeyId}",
+        "definition": {
+          "entityName": "GoogleApiKey",
+          "schema": {
+            "$ref": "#/backend/entities/GoogleApiKey"
+          },
+          "description": "Subcollection to store Google Gemini API keys."
+        }
+      }
+    ]
+  }
+}

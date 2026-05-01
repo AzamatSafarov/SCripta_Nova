@@ -1,0 +1,13 @@
+
+runtime: nodejs20
+
+runConfig:
+  maxInstances: 2
+  memoryMiB: 2048
+  cpu: 1
+
+env:
+  - variable: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+    value: studio-3705475480-e7564
+  - variable: NODE_ENV
+    value: production
